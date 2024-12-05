@@ -1,0 +1,42 @@
+---
+title: "Drinking Water Quality Analysis"
+author: "Tom Gibbens-Matsuyama"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+### Load libraries
+```{r}
+library(tidyverse)
+library(here)
+```
+
+### Load data
+```{r}
+lab_water <- read_csv(here("data", "lab_results.csv"))
+
+field_water <- read_csv(here("data", "field_results.csv"))
+```
+
+### Explore the data
+The variables that I am interested in are parameter, result, station_type, sample date. I am particulary interested in the type of variables that are within the parameter column. Just by looking at the data set from the preview, I can see that pH, hardness, dissolved molecules, and much more are involved. However, I want to see exactly what they have in there since there are over 4 million rows. 
+
+### Explore the data
+```{r}
+unique(lab_water$parameter)
+```
+
+Looking at this dataset, the columns I can see that i am interested in are "pH", "Total Hardness", "Dissolved Hardness", "Turbidity", "Dissolved Mercury", "Dissolved Lead", "Dissolved Hardness"
+
+```{r}
+unique(field_water$parameter)
+```
+
+Looking at this dataset, the columns I can see that I am interested in are "pH", "DissolvedOxygen", "Turbidity", "Algae (Description)" 
+
+```{r}
+unique(field_water$fdr_result)
+```
+
