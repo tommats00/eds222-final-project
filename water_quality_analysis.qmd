@@ -7,36 +7,211 @@ editor_options:
   chunk_output_type: console
 ---
 
-### Load libraries
+# How Water Quality pH has Changed Over Time and Space 
+
+
+
+---- IMAGE ----
+Image Credits: 
+
+
+
+## Introduction & Background
+In this project, I work with data from the California Department of Water Resources (DWR), analyzing data using statistical analysis methods covered in the Master of Environmental Data Science program’s Environmental Data Science (EDS) 222: Statistics for Environmental Data Science course taught by Max Czpanskiy. The scope of this project is to assess how the pH of freshwater is affected by time and space. 
+
+Water is the essence of life as we know it, without it, would mean certain death. As I have learned over and over in my years of schooling, freshwater only accounts for 3% of all water on the Earth. It is astounding to think that such an essential nutrient could be so scarce. California has felt the scarcity of water over the last couple of decades due to drought. According to California Department of Water Resources (https://water.ca.gov/drought#:~:text=California%20is%20no%20stranger%20to,in%20the%201920s%20and%201930s), the most recent California periods of drought were from 2012-2016 and 2007-2009. Luckily, within the last several years, increasing amounts of rainfall have propelled us out of our state drought. 
+
+As there is always potential for California to reverse back into drought conditions, it is important to understand and monitor water quality. Climate change has had a huge impact on many variables surrounding ecosystems. Likewise, water quality can be affected from it. The Environmental Protection Agency (https://19january2017snapshot.epa.gov/sites/production/files/2016-09/documents/climate-change-ca.pdf) stated that Southern California has warmed up about three degrees Fahrenheit over the last century, will the rest of the state close behind. As California warms up due to climate change, how does this affect our water quality? There are many ways climate change impacts water quality, such as extreme flooding events can lead to sediment, pathogen, and nutrient spikes. Climate change can also have a direct affect on water quality. For our oceans, it has been well studied that as temperature increases so does the pH. The same goes for bodies of freshwater. Scientists in Germany have observed the affects of climate change on pH (https://www.sciencedirect.com/science/article/pii/S096098221731655X), and how it has affected a keystone species *Daphnia*. 
+
+For the scope of this project, we will be studying the relationship of pH with time and space. Given the knowledge from above, we assume that climate change has had direct and indirect affects leading to an increase in pH over time. Spatially, we want to understand if a change in latitude affects the outcome of pH. 
+
+Water is the essence of life as we know it. Water quality is important to maintain the health of ecosystems, human populations, and the economy. 
+
+
+
+
+
+## About the Data 
+#### Lab Results
+This data from the California Department of Water Resources was found on [Data.ca.gov](https://data.ca.gov/dataset/water-quality-data). This is a large data set with observations beginning in January of 1953 and ending in December of 2018. There are 18 columns with over four million observations. The columns that we are interested in are `parameter`, `sample_date`, `sample_code`, `result`, `latitude`, `station_type`, and `units`. 
+
+The variables are defined by the DWR as the following:
+- `parameter`: The chemical analyte or physical parameter that was measured
+- `sample_date`: The date the sample was collected
+- `sample_code`: Unique DWR lab and field data sample code
+- `result`: The measured result of the constituent
+- `latitude`: Latitude (NAD83)
+- `station_type`: General description of sampling site location, i.e., surface water, grounwater, or other
+- `units`: Units of measure for the result
+
+### Field Data
+Like our lab data, this dataset was also from the DWR found on [Data.ca.gov](https://data.ca.gov/dataset/water-quality-data). This dataset contains 22 columns with over a million observations. We are interested in the same columns as our lab data. However, there are a couple of columns that have different names. Them being: `fdr_result` and `uns_name`. 
+
+These variables are defined by the DWR as the following:
+- `fdr_result`: The numeric field result
+- `uns_name`: Units of measure
+
+As both of our datasets are very large, we will need to do some initial filtering in order to run our models with them. We may even have to use a random sample from our data so that the computer can run it without crashing. 
+
+### Load libraries 
+
 ```{r}
 library(tidyverse)
 library(here)
+library(lubridate)
 ```
 
-### Load data
+### Load data 
+
 ```{r}
 lab_water <- read_csv(here("data", "lab_results.csv"))
 
 field_water <- read_csv(here("data", "field_results.csv"))
 ```
 
+
+For my analysis, I want to run a linear regression model to see the relationship of `pH` with `sample_date` and `latitude`. Before I can run my model or make any preliminary plots, I need to filter the data down a bit. As of now, it is too large and will most likely cause my R to crash. `lab_water` and `field_water` will be filtered through the following code:
+
+```{r}
+
+```
+
+
+
+## Data Exploration, Preliminary Plotting
+
+
+
+
+
+## Filtering down data (Can't run LM b/c data is too large)
+
+
+
+
+
+
+## Linear Regression Model Interpretation 
+
+---- Simple Linear Regression (pH) ~ latitude 
+---- Multiple Linear Regression (pH) ~ latitude + date
+---- Multiple w/ Interaction (pH) ~ latitude + date + latitude: date 
+
+---- Notes for this section: ----
+
+1. Plot initial Simple Regression
+
+Multiple Linear: 
+
+2. Include Latex Equations
+3. Define my variables and coefficients in my equation
+
+Multiple w/ Interaction:
+
+Repeat steps from above 
+
+
+
+
+## Conclusions
+
+
+
+
+
+## What to do in future studies
+
+
+
+
+## Sources
+
+
+
+
+## Footnotes
+
+
+
+
+
+
 ### Explore the data
 The variables that I am interested in are parameter, result, station_type, sample date. I am particulary interested in the type of variables that are within the parameter column. Just by looking at the data set from the preview, I can see that pH, hardness, dissolved molecules, and much more are involved. However, I want to see exactly what they have in there since there are over 4 million rows. 
 
+
+
+
+
+
 ### Explore the data
 ```{r}
-unique(lab_water$parameter)
-```
+unique(field_water$parameter)
 
-Looking at this dataset, the columns I can see that i am interested in are "pH", "Total Hardness", "Dissolved Hardness", "Turbidity", "Dissolved Mercury", "Dissolved Lead", "Dissolved Hardness"
+unique(field_water$fdr_result)
+```
 
 ```{r}
-unique(field_water$parameter)
+ground_water <- lab_water %>% 
+  filter(parameter == "pH") %>% 
+  mutate(sample_date = mdy_hm(sample_date)) %>% 
+  filter(station_type == "Groundwater") %>% 
+  filter(longitude < -50) %>% 
+  drop_na(sample_date)
+
+
+ground_plot <- ggplot(ground_water, aes(x = longitude, y = latitude,
+                                        alpha = 0.05)) +
+  geom_point() +
+  theme_minimal()
+
+ground_plot
 ```
+
+```{r}
+
+surface_water <- lab_water %>% 
+  filter(parameter == "pH") %>% 
+ # mutate(sample_date = mdy_hm(sample_date)) %>% 
+  filter(station_type == "Surface Water") %>% 
+  drop_na(sample_date)
+
+surface_plot <- ggplot(surface_water, aes(x = longitude, y = latitude,
+                                          alpha = 0.05)) +
+  geom_point()
+
+surface_plot
+```
+
+```{r}
+summary(lm(parameter ~ latitude + sample_date, data = surface_water))
+```
+
+```{r}
+# Something to consider is subsetting the code
+
+#### ----- From My Friend ----- ####
+
+
+
+# Randomly sample a subset of the data
+set.seed(123)  # For reproducibility
+subset_data <- surface_water[sample(nrow(surface_water), 10000), ]
+
+# Fit the model on the subset
+model <- lm(parameter ~ latitude + sample_date + latitude:sample_date, data = subset_data)
+
+```
+
+
+
+
+
+Looking at this dataset, the columns I can see that i am interested in are "pH", "Total Hardness", "Dissolved Hardness", "Turbidity", "Dissolved Mercury", "Dissolved Lead", "Dissolved Hardness"
 
 Looking at this dataset, the columns I can see that I am interested in are "pH", "DissolvedOxygen", "Turbidity", "Algae (Description)" 
 
 ```{r}
-unique(field_water$fdr_result)
+
 ```
 
