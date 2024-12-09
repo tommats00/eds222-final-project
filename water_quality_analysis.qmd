@@ -7,61 +7,59 @@ editor_options:
   chunk_output_type: console
 ---
 
-# How Water Quality pH has Changed Over Time and Space 
+# How Water Quality pH has Changed Over Time and Space
 
-
-
----- IMAGE ----
-Image Credits: 
-
-
+---- IMAGE ---- Image Credits:
 
 ## Introduction & Background
-In this project, I work with data from the California Department of Water Resources (DWR), analyzing data using statistical analysis methods covered in the Master of Environmental Data Science program’s Environmental Data Science (EDS) 222: Statistics for Environmental Data Science course taught by Max Czpanskiy. The scope of this project is to assess how the pH of freshwater is affected by time and space. 
 
-Water is the essence of life as we know it, without it, would mean certain death. As I have learned over and over in my years of schooling, freshwater only accounts for 3% of all water on the Earth. It is astounding to think that such an essential nutrient could be so scarce. California has felt the scarcity of water over the last couple of decades due to drought. According to California Department of Water Resources (https://water.ca.gov/drought#:~:text=California%20is%20no%20stranger%20to,in%20the%201920s%20and%201930s), the most recent California periods of drought were from 2012-2016 and 2007-2009. Luckily, within the last several years, increasing amounts of rainfall have propelled us out of our state drought. 
+In this project, I work with data from the California Department of Water Resources (DWR), analyzing data using statistical analysis methods covered in the Master of Environmental Data Science program’s Environmental Data Science (EDS) 222: Statistics for Environmental Data Science course taught by Max Czpanskiy. The scope of this project is to assess how the pH of freshwater is affected by time and space.
 
-As there is always potential for California to reverse back into drought conditions, it is important to understand and monitor water quality. Climate change has had a huge impact on many variables surrounding ecosystems. Likewise, water quality can be affected from it. The Environmental Protection Agency (https://19january2017snapshot.epa.gov/sites/production/files/2016-09/documents/climate-change-ca.pdf) stated that Southern California has warmed up about three degrees Fahrenheit over the last century, will the rest of the state close behind. As California warms up due to climate change, how does this affect our water quality? There are many ways climate change impacts water quality, such as extreme flooding events can lead to sediment, pathogen, and nutrient spikes. Climate change can also have a direct affect on water quality. For our oceans, it has been well studied that as temperature increases so does the pH. The same goes for bodies of freshwater. Scientists in Germany have observed the affects of climate change on pH (https://www.sciencedirect.com/science/article/pii/S096098221731655X), and how it has affected a keystone species *Daphnia*. 
+Water is the essence of life as we know it, without it, would mean certain death. As I have learned over and over in my years of schooling, freshwater only accounts for 3% of all water on the Earth. It is astounding to think that such an essential nutrient could be so scarce. California has felt the scarcity of water over the last couple of decades due to drought. According to California Department of Water Resources (https://water.ca.gov/drought#:\~:text=California%20is%20no%20stranger%20to,in%20the%201920s%20and%201930s), the most recent California periods of drought were from 2012-2016 and 2007-2009. Luckily, within the last several years, increasing amounts of rainfall have propelled us out of our state drought.
 
-For the scope of this project, we will be studying the relationship of pH with time and space. Given the knowledge from above, we assume that climate change has had direct and indirect affects leading to an increase in pH over time. Spatially, we want to understand if a change in latitude affects the outcome of pH. 
+As there is always potential for California to reverse back into drought conditions, it is important to understand and monitor water quality. Climate change has had a huge impact on many variables surrounding ecosystems. Likewise, water quality can be affected from it. The Environmental Protection Agency (https://19january2017snapshot.epa.gov/sites/production/files/2016-09/documents/climate-change-ca.pdf) stated that Southern California has warmed up about three degrees Fahrenheit over the last century, will the rest of the state close behind. As California warms up due to climate change, how does this affect our water quality? There are many ways climate change impacts water quality, such as extreme flooding events can lead to sediment, pathogen, and nutrient spikes. Climate change can also have a direct affect on water quality. For our oceans, it has been well studied that as temperature increases so does the pH. The same goes for bodies of freshwater. Scientists in Germany have observed the affects of climate change on pH (https://www.sciencedirect.com/science/article/pii/S096098221731655X), and how it has affected a keystone species *Daphnia*.
 
-Water is the essence of life as we know it. Water quality is important to maintain the health of ecosystems, human populations, and the economy. 
+For the scope of this project, we will be studying the relationship of pH with time and space. Given the knowledge from above, we assume that climate change has had direct and indirect affects leading to an increase in pH over time. Spatially, we want to understand if a change in latitude affects the outcome of pH.
 
+Water is the essence of life as we know it. Water quality is important to maintain the health of ecosystems, human populations, and the economy.
 
+## About the Data
 
-
-
-## About the Data 
 #### Lab Results
-This data from the California Department of Water Resources was found on [Data.ca.gov](https://data.ca.gov/dataset/water-quality-data). This is a large data set with observations beginning in January of 1953 and ending in December of 2018. There are 18 columns with over four million observations. The columns that we are interested in are `parameter`, `sample_date`, `sample_code`, `result`, `latitude`, `station_type`, and `units`. 
+
+This data from the California Department of Water Resources was found on [Data.ca.gov](https://data.ca.gov/dataset/water-quality-data). This is a large data set with observations beginning in January of 1953 and ending in December of 2024. There are 18 columns with over four million observations. The columns that we are interested in are `parameter`, `sample_date`, `sample_code`, `result`, `latitude`, `station_type`, and `units`.
 
 The variables are defined by the DWR as the following:
-- `parameter`: The chemical analyte or physical parameter that was measured
-- `sample_date`: The date the sample was collected
-- `sample_code`: Unique DWR lab and field data sample code
-- `result`: The measured result of the constituent
-- `latitude`: Latitude (NAD83)
-- `station_type`: General description of sampling site location, i.e., surface water, grounwater, or other
-- `units`: Units of measure for the result
+
+-   `parameter`: The chemical analyte or physical parameter that was measured
+-   `sample_date`: The date the sample was collected
+-   `sample_code`: Unique DWR lab and field data sample code
+-   `result`: The measured result of the constituent
+-   `latitude`: Latitude (NAD83)
+-   `station_type`: General description of sampling site location, i.e., surface water, grounwater, or other
+-   `units`: Units of measure for the result
 
 ### Field Data
-Like our lab data, this dataset was also from the DWR found on [Data.ca.gov](https://data.ca.gov/dataset/water-quality-data). This dataset contains 22 columns with over a million observations. We are interested in the same columns as our lab data. However, there are a couple of columns that have different names. Them being: `fdr_result` and `uns_name`. 
+
+Like our lab data, this dataset was also from the DWR found on [Data.ca.gov](https://data.ca.gov/dataset/water-quality-data). This dataset contains 22 columns with over a million observations. We are interested in the same columns as our lab data. However, there are a couple of columns that have different names. Them being: `fdr_result` and `uns_name`.
 
 These variables are defined by the DWR as the following:
-- `fdr_result`: The numeric field result
-- `uns_name`: Units of measure
 
-As both of our datasets are very large, we will need to do some initial filtering in order to run our models with them. We may even have to use a random sample from our data so that the computer can run it without crashing. 
+-   `fdr_result`: The numeric field result
+-   `uns_name`: Units of measure
 
-### Load libraries 
+As both of our datasets are very large, we will need to do some initial filtering in order to run our models with them. We may even have to use a random sample from our data so that the computer can run it without crashing.
+
+### Load libraries
 
 ```{r}
 library(tidyverse)
 library(here)
 library(lubridate)
+library(patchwork)
 ```
 
-### Load data 
+### Load data
 
 ```{r}
 lab_water <- read_csv(here("data", "lab_results.csv"))
@@ -69,82 +67,336 @@ lab_water <- read_csv(here("data", "lab_results.csv"))
 field_water <- read_csv(here("data", "field_results.csv"))
 ```
 
-
 For my analysis, I want to run a linear regression model to see the relationship of `pH` with `sample_date` and `latitude`. Before I can run my model or make any preliminary plots, I need to filter the data down a bit. As of now, it is too large and will most likely cause my R to crash. `lab_water` and `field_water` will be filtered through the following code:
+
+Initially, we want to create new dataframes for surface and ground water for both datasets. So, we want to new dataframes `ground` and `surface` for both our `lab_water` and `field_water`. We are introducing four new dataframes.
+
+#### Ground and surface water from our Lab Data
+
+```{r}
+# For our lab data
+
+ground_lab <- lab_water %>% 
+  filter(parameter == "pH") %>%                    # Filter for pH
+  mutate(sample_date = mdy_hm(sample_date)) %>% 
+  mutate(year = as.numeric(format(sample_date, "%Y"))) %>%  
+  filter(station_type == "Groundwater") %>%        # Filter to only groundwater
+  filter(longitude < -50) %>%                      # Get rid of longitudinal outliers
+  drop_na(sample_date) %>%                             # Drop NAs for our dates
+  mutate(result = as.numeric(result)) %>% 
+  filter(result >= 0 & result <= 14.0) 
+
+
+
+
+
+surface_lab <- lab_water %>% 
+  filter(parameter == "pH") %>% 
+  mutate(sample_date = mdy_hm(sample_date)) %>% 
+  mutate(year = as.numeric(format(sample_date, "%Y"))) %>%
+  filter(station_type == "Surface Water") %>% 
+  drop_na(sample_date) %>% 
+  mutate(result = as.numeric(result)) %>% 
+  filter(result >= 0 & result <= 14.0)
+```
+
+The code above is taking our lab data and dividing it into two new dataframes. These dataframes are filtered to samples collected from ground water and samples collected from surface water. It is filtering our `parameter` to only pH as that is the result we are interested in. We had longitudinal outliers that represneted observations outside of California. We had to filter those out. We also filtered to a pH range of 0 to 14 as we should not have any values outside of this range.
+
+### Preliminary Exploration
+Now that we have our data filtered to `pH` for ground and surface water, let's take a look at the distribution of our variables. So, let's plot `latitude` and `year` as histograms for both types of water collection. It is important to always plot the data, especially when you have large datasets. 
+
+```{r}
+ground_latitude_hist <- ggplot(ground_lab, aes(x = latitude)) +
+  geom_histogram(color = "black",
+                 fill = "firebrick") +
+  labs(title = "Distribution of Latitude for Ground Water",
+       x = "Latitude",
+       y = "Count") +
+  theme_minimal() 
+
+ground_year_hist <- ggplot(ground_lab, aes(x = year)) +
+  geom_histogram(color = "black",
+                 fill = "firebrick") +
+  labs(title = "Distribution of Year for Ground Water",
+       x = "Year",
+       y = "Count") +
+  theme_minimal() 
+
+ground_latitude_hist + ground_year_hist
+
+```
+
+
+```{r}
+surface_latitude_hist <- ggplot(surface_lab, aes(latitude)) +
+  geom_histogram(color = "black",
+                 fill = "lightblue") +
+  labs(title = "Distribution of Latitude for Surface Water",
+       x = "Latitude",
+       y = "Count") +
+  theme_minimal()
+
+surface_year_hist <- ggplot(surface_lab, aes(year)) +
+  geom_histogram(color = "black",
+                 fill = "lightblue") +
+  labs(title = "Distribution of Year for Surface Water",
+       x = "Year",
+       y = "Count") +
+  theme_minimal()
+
+
+surface_latitude_hist + surface_year_hist
+```
+
+From our histograms, for ground water, we see that the there is a big skew to our `latitude` observations. Most of the data taken for ground water is centered around a latitude of 34.0. This latitude represents observations taken in Southern California, more specifically around Los Angeles, San Bernardino, and Riverside. Having a lot more observations within this latitude makes sense as the greater Los Angeles area is densely populated. As for our `year` histogram for ground water, we see that our data is approximately normally distributed with our mean around the 1960s. We know from our metadata that there are observations from 2024, but it is good to keep in mind that the bulk of our data is from 60 years ago. 
+
+As for our surface water data, we see that the latitude distribution is different from our ground water. Our data is bimodal, with peaks of observations around the 34.0 and 38.0 marks. As for ground water, it makes sense to have many observations in Los Angeles county. There is a good range of observations from about 37.0 to 40.0. It is intuitive to have many observations for surface water within this range of latitudes because it contains the California Central Valley. The central valley has more areas for surface water when compared to Southern California. 
+
+Before moving forward with linear regression, it is important to plot each explanatory variable with the response variable to see if there is a linear relationship. 
+
+```{r}
+ggplot(ground_lab, aes(x = year, y = result)) +
+  geom_point() +
+  geom_smooth(method = lm)
+
+ggplot(ground_lab, aes(x = latitude, y = result)) +
+  geom_point() + 
+  geom_smooth(method = lm)
+```
+
+```{r}
+ggplot(surface_lab, aes(x = year, y = result)) +
+  geom_point() +
+  geom_smooth(method = lm)
+
+ggplot(surface_lab, aes(x = latitude, y = result)) +
+  geom_point() +
+  geom_smooth(method = lm)
+```
+
+From our plots, we see there is a linear relationship with `year` and `latitude` with `pH`. The slope of the line is very slight, but we wouldn't expect a huge change in `pH` as the scaling is logarithmic. Let's continue with our regression model. 
+
+
+## Analysis
+
+The plan for this analysis is to run a multiple linear regression model. We are interested to see if there is a relationship between our response variable `pH` and the two explanatory variables `year` and `latitude`.
+
+$$\large Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon$$
+
+$$ \large \text{pH} = \beta_0 + \beta_1 \cdot \text{year} \cdot x_1 + \beta_2 \cdot \text{latitude} \cdot x_2 $$
+
+#### Let's run the models for both the ground and surface dataframes without interaction between `year` and `latitude`. 
+
+```{r}
+ground_model <- summary(lm(result ~ year + latitude, data = ground_lab))
+ground_model
+```
+
+### Model Interpretation:
+
+#### **Coefficients**
+
+- `Intercept`: With an intercept coefficient of 1.18, when `year` and `latitude` are 0, the estimated value of result is 1.18.
+- `year`: The coefficient is 0.0031, for each increasing `year`, our `result` increases by 0.0031 when `latitude` is constant. 
+- `latitude`: The coefficient is 0.0166, for each increasing unit in `latitude`, the estimated value of `result` increases by 0.0166, when `year` is constant. 
+
+#### **Significance**
+
+- The p-values for `year` and `latitude` are very small, indicating that they are both statistically significant.
+
+- Multiple R-squared: The r-squared value of 0.01323 is very small, indicating that 1.32% of the variablity in `result` is explained by `year` and `latitude`.
+
+### Interpretation
+
+- The low R-squared value of 0.01323 suggests that the model doesn't explain the variability in our `result`. This means that there are variables not included in the model that explain the outcome of our pH variable. 
+
+### Distribution of the residuals
+
+
+```{r}
+ground_model$residuals
+
+ground_lab$residuals <- residuals(ground_model)
+
+ggplot(ground_lab, aes(x = latitude, y = residuals)) +
+  geom_point() +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed")
+
+ggplot(ground_lab, aes(x = year, y = residuals)) +
+  geom_point() +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed")
+
+ggplot(ground_lab, aes(x = residuals)) +
+  geom_histogram()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+surface_model <- summary(lm(result ~ year + latitude, data = surface_lab))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+# ---- Initial Lm ----
+summary(lm(result ~ year + latitude, data = ground_lab))
+  
+# ---- Initial Plot of Ground Lab ----
+ggplot(ground_lab, aes(x = longitude, y = latitude)) +
+  geom_point()
+
+ggplot(ground_lab ,aes(x = year, y = result, color = county_name)) +
+  geom_point()
+
+
+
+
+
+# ---- Initial Plot of Surface Lab ----
+ggplot(surface_lab, aes(x = longitude, y = latitude)) +
+  geom_point()
+
+ggplot(surface_lab ,aes(x = year, y = result)) +
+  geom_point()
+
+# ---- Initial Lm ----
+summary(lm(result ~ year + latitude, data = surface_lab))
+```
+
+```{r}
+# ground_field <- field_water %>% 
+#   filter(parameter == "pH") %>% 
+#   #mutate(sample_date = mdy_hm(sample_date)) %>%
+#   mutate(year = as.numeric(format(sample_date, "%Y"))) %>%
+#   filter(station_type == "Groundwater") %>% 
+#   drop_na(sample_date) %>% 
+#   mutate(result = as.numeric(fdr_result)) %>% 
+#   filter(result >= 0 & result <= 14.0)
+# 
+# # ---- Initial Plot of ground field ----
+# ggplot(ground_field, aes(x = longitude, y = latitude)) +
+#   geom_point()
+# 
+# ggplot(ground_field ,aes(x = year, y = result)) +
+#   geom_point()
+# 
+# # ---- Initial Lm ----
+# summary(lm(result ~ year + latitude, data = ground_field))
+# 
+# 
+# 
+# 
+# 
+# surface_field <- field_water %>% 
+#   #mutate(sample_date = mdy_hm(sample_date)) %>%
+#   mutate(year = as.numeric(format(sample_date, "%Y"))) %>%
+#   filter(parameter == "pH") %>% 
+#   filter(station_type == "Surface Water") %>% 
+#   drop_na(sample_date) %>% 
+#   mutate(result = as.numeric(fdr_result)) %>% 
+#   filter(result >= 0 & result <= 14.0)
+# 
+# # ---- Initial Plot of surface field ----
+# ggplot(surface_field, aes(x = longitude, y = latitude)) +
+#   geom_point()
+# 
+# ggplot(surface_field ,aes(x = year, y = result)) +
+#   geom_point()
+# 
+# # ---- Initial Lm ----
+# summary(lm(result ~ year + latitude, data = surface_field))
+```
+
+## Data Exploration, Preliminary Plotting
+
+Now that we have our four dataframes that we want to work with, let's plot some of our initial data to see what we are working with. Let's make a scatterplot of the relationship of latitude with pH for all four datasets.
+
+### Ground and Surface Lab Water Initial Plots with Latitude
+
+```{r}
+# ---- Ground Lab Water Plot ----
+ggplot(ground_lab, aes(x = result, y = latitude)) +
+  geom_point()
+
+ggplot(surface_lab, aes(x = result, y = latitude)) +
+  geom_point()
+```
+
+### Ground and Surface Field Water Initial Plots with Latitude
+
+```{r}
+# ggplot(ground_field, aes(x = result, y = latitude)) +
+#   geom_point()
+# 
+# ggplot(surface_field, aes(x = result, y = latitude)) +
+#   geom_point()
+```
+
+### Ground and Surface Lab Water Initial Plots with Time
 
 ```{r}
 
 ```
 
-
-
-## Data Exploration, Preliminary Plotting
-
-
-
-
-
 ## Filtering down data (Can't run LM b/c data is too large)
 
+## Linear Regression Model Interpretation
 
-
-
-
-
-## Linear Regression Model Interpretation 
-
----- Simple Linear Regression (pH) ~ latitude 
----- Multiple Linear Regression (pH) ~ latitude + date
----- Multiple w/ Interaction (pH) ~ latitude + date + latitude: date 
+---- Simple Linear Regression (pH) \~ latitude ---- Multiple Linear Regression (pH) \~ latitude + date ---- Multiple w/ Interaction (pH) \~ latitude + date + latitude: date
 
 ---- Notes for this section: ----
 
-1. Plot initial Simple Regression
+1.  Plot initial Simple Regression
 
-Multiple Linear: 
+Multiple Linear:
 
-2. Include Latex Equations
-3. Define my variables and coefficients in my equation
+2.  Include Latex Equations
+3.  Define my variables and coefficients in my equation
 
 Multiple w/ Interaction:
 
-Repeat steps from above 
-
-
-
+Repeat steps from above
 
 ## Conclusions
 
-
-
-
-
 ## What to do in future studies
-
-
-
 
 ## Sources
 
-
-
-
 ## Footnotes
 
+### Explore the data
 
-
-
-
+The variables that I am interested in are parameter, result, station_type, sample date. I am particulary interested in the type of variables that are within the parameter column. Just by looking at the data set from the preview, I can see that pH, hardness, dissolved molecules, and much more are involved. However, I want to see exactly what they have in there since there are over 4 million rows.
 
 ### Explore the data
-The variables that I am interested in are parameter, result, station_type, sample date. I am particulary interested in the type of variables that are within the parameter column. Just by looking at the data set from the preview, I can see that pH, hardness, dissolved molecules, and much more are involved. However, I want to see exactly what they have in there since there are over 4 million rows. 
 
-
-
-
-
-
-### Explore the data
 ```{r}
 unique(field_water$parameter)
 
@@ -203,15 +455,10 @@ model <- lm(parameter ~ latitude + sample_date + latitude:sample_date, data = su
 
 ```
 
-
-
-
-
 Looking at this dataset, the columns I can see that i am interested in are "pH", "Total Hardness", "Dissolved Hardness", "Turbidity", "Dissolved Mercury", "Dissolved Lead", "Dissolved Hardness"
 
-Looking at this dataset, the columns I can see that I am interested in are "pH", "DissolvedOxygen", "Turbidity", "Algae (Description)" 
+Looking at this dataset, the columns I can see that I am interested in are "pH", "DissolvedOxygen", "Turbidity", "Algae (Description)"
 
 ```{r}
 
 ```
-
